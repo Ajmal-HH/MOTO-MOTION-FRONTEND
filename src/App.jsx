@@ -44,7 +44,6 @@ import VerifyUserDocument from './Pages/AdminSide/VerifyUserDocument';
 import AdminBikeList from './Pages/AdminSide/AdminBikeList';
 import Wallet from './Pages/UserSide/Wallet';
 import Loader from './Components/UserSide/Loader';
-import MessageHome from './Pages/Messages/MessageHome';
 import { useAuthContext } from './context/AuthContext';
 import Chat from './Pages/Messages/Chat';
 import ChatOwnerSide from './Pages/BikeOwnerSide/ChatOwnerSide';
@@ -72,8 +71,6 @@ function App() {
                 <Route path='/booking-success' element={<BookingSuccess />} />
                 <Route path='/user-bookinglist' element={<UserBookingList />} />
                 <Route path='/wallet' element={<Wallet />} />
-                <Route path='/message' element={<MessageHome />} />
-                <Route path='/message' element={authUser ? <MessageHome /> : <Navigate to={"/login"} />} />
                 <Route path='/chat'element={authUser ? <Chat /> : <Navigate to={"/login"} />} />
               </Route>
 
