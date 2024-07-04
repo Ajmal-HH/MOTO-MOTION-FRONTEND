@@ -1,4 +1,4 @@
-const BASE_URL= 'https://muhamedajmal.live/api'
+const BASE_URL= 'http://muhamedajmal.live/api'
 
 
 export {
