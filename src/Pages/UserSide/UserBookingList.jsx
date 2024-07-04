@@ -106,7 +106,7 @@ function UserBookingList() {
       <div className="w-full min-h-screen mt-5">
         {userBookingList.length > 0 ? (
           records.map((booking, index) => (
-            <div key={index} className="w-12/12 m-5 border border-gray-400 h-96 rounded-xl flex bg-white">
+            <div key={index} className="w-12/12 m-5 border border-gray-400 min-h-64 rounded-xl flex bg-white items-center">
               <div className="w-60 h-[180px] rounded-md mt-3 ml-3 object-cover bg-pink-300">
                 {booking && booking.bike.image && booking.bike?.image.length > 0 && <img src={`${booking.bike.image[0]}`} className="object-cover w-full h-full rounded-lg " alt="Bike Image" />
                 }
@@ -122,43 +122,48 @@ function UserBookingList() {
                 </div>
                 <p className="mt-2">PickUp Location: {booking.bike.location}</p>
                 <p className="mt-2">Booking status: {booking.booking_status}</p>
-                <div className='flex  mt-5'>
-                {[...Array(5)].map((star, index) => {
-                  const currentRating = index + 1;
-                  return (
-                    <label key={index}>
-                      <input
-                        type="radio"
-                        name='rating'
-                        value={currentRating}
-                        onClick={() => setRating(currentRating)}
-                      />
-                      <FaStar
-                        className='cursor-pointer'
-                        size={35}
-                        color={currentRating <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
-                        onMouseEnter={() => setHover(currentRating)}
-                        onMouseLeave={() => setHover(null)}
-                      />
-                    </label>
-                  );
-                })}
+                { booking && booking.booking_status === 'dropoff' ? (
+                    <>
+                    <div className='flex  mt-5'>
+                    {[...Array(5)].map((star, index) => {
+                      const currentRating = index + 1;
+                      return (
+                        <label key={index}>
+                          <input
+                            type="radio"
+                            name='rating'
+                            value={currentRating}
+                            onClick={() => setRating(currentRating)}
+                          />
+                          <FaStar
+                            className='cursor-pointer'
+                            size={35}
+                            color={currentRating <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
+                            onMouseEnter={() => setHover(currentRating)}
+                            onMouseLeave={() => setHover(null)}
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  
+                  <div className='flex flex-col mt-5 '>
+                    <label>Add your review</label>
+                    <input
+                      type="text"
+                      placeholder='Add your review'
+                      value={review}
+                      onChange={(e) => setReview(e.target.value)}
+                      className='w-96 h-20 pl-2 border border-yellow-500'
+                    />
+                    <button onClick={()=>handleReview(booking.bike_id)} className='w-28 h-9 mt-2 bg-yellow-500 rounded-md mb-4'>ADD REVIEW</button>
+                  </div>
+                  </>
+    
+                ) : ("")}
+                
               </div>
-              <div className='flex flex-col mt-5 '>
-                <label>Add your review</label>
-                <input
-                  type="text"
-                  placeholder='Add your review'
-                  value={review}
-                  onChange={(e) => setReview(e.target.value)}
-                  className='w-96 h-20 pl-2 border border-yellow-500'
-                />
-                <button onClick={()=>handleReview(booking.bike_id)} className='w-28 h-9 mt-2 bg-yellow-500 rounded-md'>ADD REVIEW</button>
-              </div>
-              </div>
-              {/* <div className="rounded-lg w-full h-7 flex justify-center items-center mt-2 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white cursor-pointer">
-                  <h1>Cancel Booking</h1>
-                </div> */}
+           
               <div className="w-40 h-full mr-10 ml-auto flex justify-center items-center flex-col">
                 {booking && booking.booking_status === 'canceled' ? (
                   <div className='rounded-lg w-full h-7 flex justify-center items-center mt-2 border border-red-300 text-red-400 hover:bg-red-300 hover:text-white'>

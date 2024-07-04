@@ -19,9 +19,7 @@ function BikeDetails() {
   const [dropoffTime, setDropoffTime] = useState('');
   const [errors, setErrors] = useState({});
   const [notavbl, setNotavbl] = useState('');
-  const [review, setReview] = useState('');
-  // const [rating, setRating] = useState(null);
-  // const [hover, setHover] = useState(null);
+
   const navigate = useNavigate();
 
   const today = new Date().toISOString().split('T')[0];
@@ -45,10 +43,15 @@ function BikeDetails() {
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Items per page
+  const itemsPerPage = 5;
+
+  // Ensure bike.reviews is defined and not empty
+  const reviews = bike?.reviews ? [...bike.reviews].reverse() : [];
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const records = bike?.reviews?.slice(indexOfFirstItem, indexOfLastItem) || [];
+  const records = reviews.slice(indexOfFirstItem, indexOfLastItem);
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleSubmit = async (id, e) => {
@@ -69,6 +72,9 @@ function BikeDetails() {
             } else if (message === 'verifying document') {
               toast.error(message);
               setNotavbl(message);
+            }else if (message === 'User is Blocked' || message === 'Auth failed'){
+              navigate('/')
+              toast.error(message)       
             } else {
               toast.error(message);
               setNotavbl(message);

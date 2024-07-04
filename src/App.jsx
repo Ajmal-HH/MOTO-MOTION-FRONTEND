@@ -47,6 +47,7 @@ import Loader from './Components/UserSide/Loader';
 import { useAuthContext } from './context/AuthContext';
 import Chat from './Pages/Messages/Chat';
 import ChatOwnerSide from './Pages/BikeOwnerSide/ChatOwnerSide';
+import ErrorPage from './Components/All/ErrorPage';
 
 function App() {
   const {authUser} = useAuthContext()
@@ -64,6 +65,7 @@ function App() {
               <Route path='/bike-details' element={<BikeDetails />} />
               <Route path='/reset-password' element={<ResetPasswordForm />} />
               <Route path='/set-newpassword' element={<SetNewPassword />} />
+              <Route path='/404' element={<ErrorPage />} />
               <Route element={<UserProtectedRoute />}>
                 <Route path='/userprofile' element={<UserProfile />} />
                 <Route path='/edit-user' element={<EditUser />} />

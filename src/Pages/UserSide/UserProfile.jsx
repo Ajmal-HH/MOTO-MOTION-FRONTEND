@@ -22,9 +22,17 @@ function UserProfile() {
             .then((response) => {
                 setUser(response.data)
             })
-            .catch(() => {
+            .catch((err) => {
+                const message = err.response?.data?.message;
+                if (message) {
+                    if (message === 'User is Blocked') {
+                        navigate('/');
+                        toast.error(message);
+                    }
+                }else{
                 navigate('/')
                 console.log('Error to fetch user data');
+                }
             })
     }, [documentUpload, navigate])
 
@@ -218,10 +226,10 @@ function UserProfile() {
 
 
             </div>
-                <div>
+            <div>
                 <Footer />
             </div>
-           
+
         </div>
     )
 }
