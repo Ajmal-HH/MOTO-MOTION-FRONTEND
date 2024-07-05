@@ -65,7 +65,7 @@ function App() {
               <Route path='/bike-details' element={<BikeDetails />} />
               <Route path='/reset-password' element={<ResetPasswordForm />} />
               <Route path='/set-newpassword' element={<SetNewPassword />} />
-              <Route path='/404' element={<ErrorPage />} />
+              <Route path='*' element={<ErrorPage />} />
               <Route element={<UserProtectedRoute />}>
                 <Route path='/userprofile' element={<UserProfile />} />
                 <Route path='/edit-user' element={<EditUser />} />
