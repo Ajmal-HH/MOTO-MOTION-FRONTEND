@@ -1,5 +1,4 @@
 import motologo from '../../assets/moto-motion-logo.png'
-// import motologo1 from '../../assets/moto-motion-logo1.png'
 import { Link,useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import axios from '../../utils/axiosConfig'
@@ -10,7 +9,6 @@ import { FaUser } from "react-icons/fa";
 function Header() {
 
   const token = Cookies.get('jwt');
-  console.log(token,"token");
   const navigate = useNavigate()
 
   const handleLogout = () =>{
