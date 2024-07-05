@@ -98,13 +98,7 @@ function AdminBikeList() {
                                           
                                         )}
                                     </td>
-                                    {/* <td className="px-6 py-4 whitespace-nowrap">
-            {bike.is_deleted ? (
-                <span className="bg-red-400 text-white px-2 py-1 rounded">Inactive</span>
-            ) : (
-                <span className="bg-green-500 text-white px-2 py-1 rounded">Active</span>
-            )}
-        </td> */}
+  
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         {bike.is_deleted ? (
                                             <span className="bg-red-400 text-white font-bold py-2 px-4 rounded">

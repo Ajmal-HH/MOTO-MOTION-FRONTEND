@@ -33,7 +33,7 @@ function Chat() {
     }, [receiverId]);
 
     useEffect(() => {
-      const newSocket = io("http://localhost:5001");
+      const newSocket = io("https://muhamedajmal.live");
       setSocket(newSocket);
 
       return () => {

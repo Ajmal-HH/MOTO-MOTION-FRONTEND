@@ -95,13 +95,7 @@ function Homepage() {
     ))
 }
 
-     {/* <div className='bg-white w-52 h-52 mt-2 mr-36 rounded-lg flex flex-col items-center '>
-     <div className='bg-white w-36 h-36 rounded-lg mt-2 border border-gray-500 flex items-center justify-center'>
-     <img src={bike} alt="" />
-     </div>
-         <h1 className='font-googleFont'>hello</h1>
-         <button className='bg-[#FFB016] font-googleFont rounded-2xl w-20 h-5 flex items-center justify-center '>Book Now</button>
-     </div> */}
+
    </div>
    <div className='w-full h-[600px] bg-white'>
      <div className='w-full h-24 '>

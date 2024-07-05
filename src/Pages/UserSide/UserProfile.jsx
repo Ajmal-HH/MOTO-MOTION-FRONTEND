@@ -62,10 +62,6 @@ function UserProfile() {
             });
     }
 
-    // const handleFileChange = (e) => {
-    //     const selectedFiles = e.target.files;
-    //     setDocument([...document, ...selectedFiles]);
-    // }
 
 
     const frontSideDoc = (e) => {

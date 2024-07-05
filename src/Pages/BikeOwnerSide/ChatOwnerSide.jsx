@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react"
 import { TiMessage } from "react-icons/ti"
 import axios from '../../utils/axiosConfig'
@@ -131,8 +132,7 @@ const ChatOwnerSide = () => {
 
     return (
         <>
-            {/* <Tuturnavbar /> */}
-            {/* <h1 style={{backgroundColor:"pink"}}>CHAT ROOM</h1> */}
+
 
             <div className="flex h-screen overflow-hidden bg-blue-gray-500">
                 {/* SIDE BAR */}

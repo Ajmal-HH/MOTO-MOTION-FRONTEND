@@ -109,13 +109,7 @@ function AddBike() {
                                 </div>
                                 <div>
                                     <label htmlFor="bikeLocation" className="block text-sm font-semibold text-gray-700">Bike Location</label>
-                                    {/* <input type="text"
-                                    id="location"
-                                    name='location'
-                                    placeholder="Enter Bike location"
-                                    className="input-field border border-gray-400 w-full pl-2"
-                                    onChange={(e) => setLocation(e.target.value)}
-                                /> */}
+                         
                                     <select className=' border border-gray-400 w-full pl-2' onChange={(e) => setLocation(e.target.value)}>
                                         <option value="">select</option>
                                         <option value="Fort kochi">Fort kochi</option>

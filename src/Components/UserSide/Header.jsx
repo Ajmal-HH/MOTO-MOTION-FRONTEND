@@ -10,6 +10,7 @@ import { FaUser } from "react-icons/fa";
 function Header() {
 
   const token = Cookies.get('jwt');
+  console.log(token,"token");
   const navigate = useNavigate()
 
   const handleLogout = () =>{

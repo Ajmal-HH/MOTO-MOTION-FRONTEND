@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../utils/axiosConfig';
 import { toast } from 'react-toastify';

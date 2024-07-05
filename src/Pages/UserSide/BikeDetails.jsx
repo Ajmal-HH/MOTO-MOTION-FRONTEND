@@ -92,22 +92,7 @@ function BikeDetails() {
     }
   };
 
-  // const handleReview = () => {
-  //   axios.post('/bike-review', { review, bikeId })
-  //     .then((response) => {
-  //       const { username, message, date } = response.data;
-  //       toast.success(message);
-  //       setBike((prevBike) => ({
-  //         ...prevBike,
-  //         reviews: [...prevBike.reviews, { username, review, date }]
-  //       }));
-  //       setReview('');
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error adding review:', error);
-  //       toast.error('Failed to add review. Please try again later.');
-  //     });
-  // };
+
 
   return (
     <div>
