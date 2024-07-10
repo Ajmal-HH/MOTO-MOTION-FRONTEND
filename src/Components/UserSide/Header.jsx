@@ -9,8 +9,12 @@ import { FaUser } from "react-icons/fa";
 function Header() {
 
   const token = Cookies.get('jwt');
-  console.log(token,"token...");
   const navigate = useNavigate()
+  if(token){
+    console.log('token>>', token);
+  }else{
+    console.log('no token');
+  }
 
   const handleLogout = () =>{
     axios.get('/user-logout')
