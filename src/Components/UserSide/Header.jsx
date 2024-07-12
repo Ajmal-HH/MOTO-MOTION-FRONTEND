@@ -8,7 +8,7 @@ import { FaUser } from "react-icons/fa";
 
 function Header() {
 
-  const token = Cookies.get('jwt');
+  const token = Cookies.get('token');
   const navigate = useNavigate()
 
   console.log(Cookies.get('jwt'),"cookie data");

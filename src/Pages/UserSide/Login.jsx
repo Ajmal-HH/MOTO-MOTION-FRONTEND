@@ -32,7 +32,10 @@ function Login() {
       await signInValidationSchema.validate({ email, password }, { abortEarly: false })
 
       axios.post(`/login`, { email, password })
-        .then(() => {
+        .then((response) => {
+          const { token } = response.data;
+        // Store token in localStorage
+        localStorage.setItem('token', token);
           toast.success('Login successfully')
           navigate('/')
         })
