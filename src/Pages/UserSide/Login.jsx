@@ -3,7 +3,6 @@ import bgImage from '../../assets/a.jpg'
 import { useEffect, useState } from 'react'
 import axios from '../../utils/axiosConfig'
 import { toast } from 'react-toastify'
-import Cookies from 'js-cookie'
 import { signInValidationSchema } from '../../FormValidation'
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
@@ -12,7 +11,7 @@ import Header from '../../Components/UserSide/Header'
 
 function Login() {
 
-  const token = Cookies.get('jwt')
+  const token = localStorage.getItem('token');
 
   const navigate = useNavigate()
   const [email, setEmail] = useState('')

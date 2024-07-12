@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../utils/axiosConfig';
 import { toast } from 'react-toastify';
@@ -9,14 +8,12 @@ function Header() {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
-  console.log(localStorage.getItem('token'), "localStorage data");
-  console.log('token>>', token ? token : 'no token');
 
   const handleLogout = () => {
     axios.get('/user-logout')
       .then(() => {
         toast.success('User Logout!');
-        localStorage.removeItem('jwt');  // Remove token on logout
+        localStorage.removeItem('token');  
         navigate('/');
       })
       .catch(error => {
