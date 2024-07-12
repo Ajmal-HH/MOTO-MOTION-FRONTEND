@@ -10,7 +10,8 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     (config) => {
-      const token = Cookies.get("jwt"); 
+      // const token = Cookies.get("jwt"); 
+      const token =  localStorage.getItem("token");
       console.log(token, "Token from cookie");
 
       
