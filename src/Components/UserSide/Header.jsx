@@ -10,11 +10,10 @@ function Header() {
 
   const token = Cookies.get('jwt');
   const navigate = useNavigate()
-  if(token){
-    console.log('token>>', token);
-  }else{
-    console.log('no token');
-  }
+
+  console.log(Cookies.get('jwt'),"cookie data");
+  console.log('token>>', token ? token : 'no token');
+
 
   const handleLogout = () =>{
     axios.get('/user-logout')
