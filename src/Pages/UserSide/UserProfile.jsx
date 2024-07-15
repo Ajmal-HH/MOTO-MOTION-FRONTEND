@@ -18,24 +18,27 @@ function UserProfile() {
 
 
     useEffect(() => {
-        axios.get('/userprofile')
-            .then((response) => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await axios.get('/userprofile');
                 console.log(response.data);
-                setUser(response.data)
-            })
-            .catch((err) => {
+                setUser(response.data);
+            } catch (err) {
                 const message = err.response?.data?.message;
                 if (message) {
                     if (message === 'User is Blocked') {
                         navigate('/');
                         toast.error(message);
                     }
-                }else{
-                navigate('/')
-                console.log('Error to fetch user data');
+                } else {
+                    navigate('/');
+                    console.log('Error fetching user data');
                 }
-            })
-    }, [documentUpload, navigate])
+            }
+        };
+
+        fetchUserProfile();
+    }, [documentUpload, navigate]);
 
     const handleDocument = (e) => {
         e.preventDefault()
