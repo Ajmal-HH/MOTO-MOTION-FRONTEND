@@ -12,9 +12,7 @@ axiosInstance.interceptors.request.use(
       // const token = Cookies.get("jwt"); 
       const token =  localStorage.getItem("token");
 
-      
       if (token) {
-        console.log(token, "Token from cookie");
         config.headers["Authorization"] = "Bearer " + token;
       }
       return config;
