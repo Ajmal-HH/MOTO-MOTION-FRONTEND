@@ -1,12 +1,12 @@
 import {  Outlet, useNavigate } from "react-router-dom";
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 
 const UserProtectedRoute = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = Cookies.get('jwt');
+        const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login'); // Navigate to login if token doesn't exist
         }
