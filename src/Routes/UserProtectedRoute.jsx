@@ -7,6 +7,7 @@ const UserProtectedRoute = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        console.log(token,"token check in protected route");
         if (!token) {
             navigate('/login'); // Navigate to login if token doesn't exist
         }
