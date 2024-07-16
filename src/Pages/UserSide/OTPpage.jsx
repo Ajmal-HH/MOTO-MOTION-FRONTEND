@@ -42,7 +42,7 @@ function OTPpage() {
       toast.error('Enter valid OTP');
     } else {
       if(purpose === 'forgot-password'){
-        axios.post('/verify-forgOTP',{otp,userData})
+        axios.post('/verify-forgOTP',{otp})
           .then(() => {
               navigate('/set-newpassword')   
           })
@@ -51,7 +51,7 @@ function OTPpage() {
             console.error(err);
           });
       }else{
-        axios.post(`/verifyOTP`, { otp ,generatedOTP})
+        axios.post(`/verifyOTP`, { otp ,generatedOTP,userData})
         .then(()=>{
           toast.success('SignUp successful');
           sessionStorage.removeItem("usersDetails")
