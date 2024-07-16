@@ -67,7 +67,7 @@ function Register() {
 
      axios.post(`/verifyuser`, { name, email, password, mobile })
      .then((response) => {
-      const generatedOTP = response.data.otp
+      const generatedOTP = response.data
       console.log(generatedOTP,"generated otp....");
       sessionStorage.setItem("generatedOTP",generatedOTP)
        navigate('/otp');
