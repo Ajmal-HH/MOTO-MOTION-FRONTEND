@@ -66,7 +66,10 @@ function Register() {
      await validationSchema.validate({name,email,mobile,password}, {abortEarly : false})
 
      axios.post(`/verifyuser`, { name, email, password, mobile })
-     .then(() => {
+     .then((response) => {
+      const generatedOTP = response.data
+      console.log(generatedOTP,"generated otp....");
+      sessionStorage.setItem("generatedOTP",generatedOTP)
        navigate('/otp');
      }).catch((err) => {
        if (err.response && err.response.data && err.response.data.message) {
