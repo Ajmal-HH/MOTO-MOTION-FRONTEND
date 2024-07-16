@@ -54,7 +54,7 @@ function BikeDetails() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleSubmit = async (id, e) => {
+  const handleSubmit = async (id, e) => { 
     e.preventDefault();
     try {
       await dateValidationSchema.validate({ pickupDate, dropoffDate, pickupTime, dropoffTime }, { abortEarly: false });
