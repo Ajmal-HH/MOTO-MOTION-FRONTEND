@@ -32,6 +32,9 @@ function Register() {
   formData.append('mobile',mobile)
   formData.append('password',password)
 
+  console.log(formData,"form data");
+  sessionStorage.setItem('usersDetails', JSON.stringify(formData))
+
   const validationSchema =  Yup.object({
     name : Yup.string()
               .matches(/^[a-zA-Z]+(?:\s+[a-zA-Z]+)*$/, 'Please enter a name containing only alphabetic characters.')
