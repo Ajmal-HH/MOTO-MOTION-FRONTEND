@@ -32,8 +32,14 @@ function Register() {
   formData.append('mobile',mobile)
   formData.append('password',password)
 
-  console.log(formData,"form data");
-  sessionStorage.setItem('usersDetails', JSON.stringify(formData))
+  const userData = {
+    name,
+    email,
+    mobile,
+    password
+  }
+  sessionStorage.setItem('usersDetails', JSON.stringify(userData))
+  
 
   const validationSchema =  Yup.object({
     name : Yup.string()

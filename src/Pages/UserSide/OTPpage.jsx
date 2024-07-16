@@ -11,6 +11,9 @@ function OTPpage() {
   const [counter, setCounter] = useState(59); // Counter starts at 59 seconds
   const location = useLocation()
   const purpose = location.state?.purpose
+
+  const sessionData = sessionStorage.getItem("usersDetails")
+  const userData =  JSON.parse(sessionData);
   
   
   useEffect(() => {
@@ -37,7 +40,7 @@ function OTPpage() {
       toast.error('Enter valid OTP');
     } else {
       if(purpose === 'forgot-password'){
-        axios.post('/verify-forgOTP',{otp})
+        axios.post('/verify-forgOTP',{otp,userData})
           .then(() => {
               navigate('/set-newpassword')   
           })
@@ -49,6 +52,7 @@ function OTPpage() {
         axios.post(`/verifyOTP`, { otp })
         .then(()=>{
           toast.success('SignUp successful');
+          sessionStorage.removeItem("usersDetails")
           navigate('/login');
         })
         .catch((err) => {
