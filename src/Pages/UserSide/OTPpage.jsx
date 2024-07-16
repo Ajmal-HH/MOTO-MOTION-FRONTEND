@@ -14,6 +14,8 @@ function OTPpage() {
 
   const sessionData = sessionStorage.getItem("usersDetails")
   const userData =  JSON.parse(sessionData);
+
+  const generatedOTP = sessionStorage.getItem("generatedOTP")
   
   
   useEffect(() => {
@@ -49,7 +51,7 @@ function OTPpage() {
             console.error(err);
           });
       }else{
-        axios.post(`/verifyOTP`, { otp })
+        axios.post(`/verifyOTP`, { otp ,generatedOTP})
         .then(()=>{
           toast.success('SignUp successful');
           sessionStorage.removeItem("usersDetails")
