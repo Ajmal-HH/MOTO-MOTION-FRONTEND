@@ -4,9 +4,15 @@ import {toast} from 'react-toastify'
 
 function Adminsidebar() {
   const navigate = useNavigate()
+  const token = localStorage.getItem('admintoken');
+
 
   const handleLogout = () =>{
-    axios.get('/admin/admin-logout')
+    axios.get('/admin/admin-logout',{
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+  })
     .then(()=>{
       localStorage.removeItem('admintoken');  
       toast.success('Admin Logout!')
