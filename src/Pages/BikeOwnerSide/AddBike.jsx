@@ -23,7 +23,9 @@ function AddBike() {
     const [loader, setLoader] = useState(false)
     const navigate = useNavigate()
 
-    console.log(image,"image");
+    const bikeOwnerData = JSON.parse(localStorage.getItem('bikeOwnerData')); 
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -48,7 +50,7 @@ function AddBike() {
             formData.append("address", address)
             formData.append("pinCode", pinCode)
 
-            axios.post(`/bikeowner/addbike`, formData, {
+            axios.post(`/bikeowner/addbike`, {formData, bikeOwnerData}, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
