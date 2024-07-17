@@ -7,7 +7,7 @@ import { useEffect, useState, useRef } from "react";
 import axios from '../../utils/axiosConfig';
 import { io } from "socket.io-client";
 
-function Chat() {
+function Chat() { 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const receiverId = searchParams.get("recieverId");
