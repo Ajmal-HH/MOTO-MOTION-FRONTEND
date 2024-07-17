@@ -22,7 +22,7 @@ function BikeOwnerDashboard() {
 
 
     useEffect(() => {
-        axios.get('/bikeowner/booking-list')
+        axios.post('/bikeowner/booking-list',{bikeOwnerData})
             .then((response) => {
                 setBookingList(response.data);
             })
