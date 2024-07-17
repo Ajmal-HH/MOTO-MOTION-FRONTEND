@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from '../utils/axiosConfig'
 
-import Cookies from 'js-cookie'
 
 
 
@@ -12,12 +11,12 @@ export const AuthContext = createContext();
 export const useAuthContext = () => {
   return useContext(AuthContext);
 };
-
+ 
 export const AuthContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
-    const token = Cookies.get('jwt')
+    const token = localStorage.getItem('token');
     if (token) {
         axios.get('/userprofile')
         .then((response)=>{
