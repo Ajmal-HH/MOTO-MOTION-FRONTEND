@@ -28,8 +28,9 @@ function BikeOwnerLogin() {
 
       axios.post(`/bikeowner/bikeowner-login`, { email, password })
         .then((response) => {
-          const {token} = response.data
+          const {token,bikeOwnerData} = response.data
           localStorage.setItem('ownerToken', token);
+          localStorage.setItem('bikeOwnerData', bikeOwnerData);
           toast.success('Login successfully')
           navigate('/bikeowner-dashboard')
         })

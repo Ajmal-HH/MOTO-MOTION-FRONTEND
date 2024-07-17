@@ -17,6 +17,10 @@ function BikeOwnerDashboard() {
     
     const [bookingList, setBookingList] = useState([]);
 
+    const bikeOwnerData = localStorage.getItem('bikeOwnerData'); 
+    console.log(bikeOwnerData,"bikeOwnerData...");
+
+
     useEffect(() => {
         axios.get('/bikeowner/booking-list')
             .then((response) => {
@@ -53,7 +57,7 @@ function BikeOwnerDashboard() {
     };
 
     useEffect(() => {
-        axios.get('/bikeowner/bikeowner-dashboard')
+        axios.get('/bikeowner/bikeowner-dashboard',{bikeOwnerData})
             .then((response) => {
               const {totalBookings,totolBikes,owner,totalRevenue,monthlySales} = response.data
                 setBikeOwner(owner)
