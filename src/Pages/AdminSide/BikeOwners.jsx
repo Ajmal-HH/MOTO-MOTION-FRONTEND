@@ -2,13 +2,12 @@ import  { useEffect, useState } from 'react'
 import Adminsidebar from '../../Components/AdminSide/Adminsidebar'
 import axios from '../../utils/axiosConfig'
 import { toast } from 'react-toastify'
-import Cookies from 'js-cookie'
 import { Link, useNavigate } from 'react-router-dom'
 import Pagination from '../../Components/All/Pagination'
 
 
 function BikeOwners() {
-    const token = Cookies.get('jwt-admin')
+    const token = localStorage.getItem('admintoken');
     const navigate = useNavigate()
     const [owner, setOwner] = useState([])
 

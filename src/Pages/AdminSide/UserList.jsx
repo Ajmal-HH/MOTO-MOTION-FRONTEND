@@ -3,13 +3,12 @@ import Adminsidebar from '../../Components/AdminSide/Adminsidebar'
 import axios from '../../utils/axiosConfig'
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import Pagination from '../../Components/All/Pagination'
 
 
 
 function UserList() {
-    const token = Cookies.get('jwt-admin')
+    const token = localStorage.getItem('admintoken');
     const [users, setUsers] = useState([])
     const navigate = useNavigate()
 

@@ -9,6 +9,7 @@ import Pagination from '../../Components/All/Pagination'
 
 function AdminBikeList() {
     const [bikes, setBikes] = useState([])
+    
 
 
     useEffect(() => {
