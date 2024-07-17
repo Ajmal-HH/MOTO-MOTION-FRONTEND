@@ -7,17 +7,35 @@ function BikeOwnerSidebar() {
   const navigate = useNavigate();
   const stateToPass = { purpose: 'bikeOwner' };
 
+  // const handleLogout = () => {
+  //   axios.get('/bikeowner/owner-logout')
+  //     .then(() => {
+  //       localStorage.removeItem('ownerToken');  
+  //       toast.success('Bike Owner Logout!');
+  //       navigate('/bikeowner-login');
+  //     })
+  //     .catch(error => {
+  //       toast.error(error.message);
+  //     });
+  // };
+
   const handleLogout = () => {
-    axios.get('/bikeowner/owner-logout')
-      .then(() => {
+    const token = localStorage.getItem('ownerToken');
+    
+    axios.get('/bikeowner/owner-logout', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(() => {
         localStorage.removeItem('ownerToken');  
         toast.success('Bike Owner Logout!');
         navigate('/bikeowner-login');
-      })
-      .catch(error => {
+    })
+    .catch(error => {
         toast.error(error.message);
-      });
-  };
+    });
+};
 
   return (
     <div className='w-60 min-h-screen font-bold bg-purple-500'>
