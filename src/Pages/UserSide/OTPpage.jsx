@@ -42,8 +42,10 @@ function OTPpage() {
       toast.error('Enter valid OTP');
     } else {
       if(purpose === 'forgot-password'){
-        axios.post('/verify-forgOTP',{otp})
-          .then(() => {
+        axios.post('/verify-forgOTP',{otp,generatedOTP})
+          .then((response) => {
+            const forgUserId =  response.data
+            sessionStorage.setItem('forgUserId', JSON.stringify(forgUserId))
               navigate('/set-newpassword')   
           })
           .catch((err) => {
@@ -66,7 +68,7 @@ function OTPpage() {
   };
 
   const resendOTP = () => {
-    axios.get(`/resentOTP`)
+    axios.get(`/resentOTP`,{userData})
       .then(() => {
         toast.success('OTP re-sent');
         setShowCounter(true); // Show the counter again after resending OTP
