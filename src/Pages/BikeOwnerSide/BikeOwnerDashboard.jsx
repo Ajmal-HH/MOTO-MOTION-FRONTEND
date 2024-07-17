@@ -57,7 +57,7 @@ function BikeOwnerDashboard() {
     };
 
     useEffect(() => {
-        axios.get('/bikeowner/bikeowner-dashboard',bikeOwnerData)
+        axios.get('/bikeowner/bikeowner-dashboard',{bikeOwnerData})
             .then((response) => {
               const {totalBookings,totolBikes,owner,totalRevenue,monthlySales} = response.data
               console.log(owner,"onwner");
