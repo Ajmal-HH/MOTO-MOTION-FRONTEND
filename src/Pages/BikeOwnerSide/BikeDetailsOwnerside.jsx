@@ -9,9 +9,12 @@ import Pagination from '../../Components/All/Pagination'
 function BikeDetailsOwnerside() {
     const [bikes, setBikes] = useState([])
 
+    const bikeOwnerData = JSON.parse(localStorage.getItem('bikeOwnerData')); 
+
+
 
     useEffect(() => {
-        axios.get(`/bikeowner/bike-list`)
+        axios.post(`/bikeowner/bike-list`,{bikeOwnerData})
             .then(response => {
                 setBikes(response.data);
                 console.log(response.data);
