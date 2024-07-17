@@ -60,7 +60,7 @@ function BikeOwnerDashboard() {
         axios.get('/bikeowner/bikeowner-dashboard',{bikeOwnerData})
             .then((response) => {
               const {totalBookings,totolBikes,owner,totalRevenue,monthlySales} = response.data
-              console.log(totalBookings,totolBikes,owner,totalRevenue,monthlySales);
+              console.log(owner,"onwner");
                 setBikeOwner(owner)
                 setTotalBookings(totalBookings)
                 setTotalRevenue(totalRevenue)
