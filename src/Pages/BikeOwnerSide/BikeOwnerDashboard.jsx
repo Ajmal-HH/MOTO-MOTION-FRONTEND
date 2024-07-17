@@ -27,7 +27,7 @@ function BikeOwnerDashboard() {
                 setBookingList(response.data);
             })
             .catch(() => {
-                toast.error('Error fetching bike details');
+                toast.error('Error fetching booking list');
             });
     }, []); 
 
