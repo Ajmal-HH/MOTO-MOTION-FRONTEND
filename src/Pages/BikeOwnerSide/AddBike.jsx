@@ -49,9 +49,8 @@ function AddBike() {
             formData.append("details", details);
             formData.append("address", address)
             formData.append("pinCode", pinCode)
-            formData.append('bikeOwnerData',bikeOwnerData)
 
-            axios.post(`/bikeowner/addbike`, formData, {
+            axios.post(`/bikeowner/addbike`, {formData, bikeOwnerData}, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
