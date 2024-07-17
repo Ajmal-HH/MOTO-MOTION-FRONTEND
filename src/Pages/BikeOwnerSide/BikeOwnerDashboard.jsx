@@ -17,8 +17,8 @@ function BikeOwnerDashboard() {
     
     const [bookingList, setBookingList] = useState([]);
 
-    const bikeOwnerData = localStorage.getItem('bikeOwnerData'); 
-    console.log(bikeOwnerData,"bikeOwnerData...");
+    const bikeOwnerData = JSON.parse(localStorage.getItem('bikeOwnerData')); 
+        console.log(bikeOwnerData,"bikeOwnerData...");
 
 
     useEffect(() => {
