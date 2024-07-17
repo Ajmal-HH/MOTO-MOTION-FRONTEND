@@ -3,13 +3,12 @@ import { Link , useNavigate } from 'react-router-dom';
 import Header from '../../Components/UserSide/Header';
 import axios from '../../utils/axiosConfig'
 import {toast} from 'react-toastify'
-import Cookies from 'js-cookie'
 import { signUpValidationSchema } from '../../FormValidation';
 
 
 
 function BikeOwnerSignup() {
-  const token = Cookies.get('bikeOwner-jwt')
+  const token = localStorage.getItem('ownerToken'); 
 
   const navigate = useNavigate()
   const [name,setName] = useState('')
