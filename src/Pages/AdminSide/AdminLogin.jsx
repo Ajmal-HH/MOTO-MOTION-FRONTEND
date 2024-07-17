@@ -2,12 +2,11 @@ import  { useEffect, useState } from 'react';
 import axios from '../../utils/axiosConfig'
 import {toast} from 'react-toastify'
 import {useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import { signInValidationSchema } from '../../FormValidation';
 
 
 function AdminLogin() {
-  const token = Cookies.get('jwt-admin')
+  const token = localStorage.getItem('admintoken');
   const navigate = useNavigate()
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
@@ -26,7 +25,10 @@ function AdminLogin() {
       await signInValidationSchema.validate({email,password},{abortEarly : false})
 
       axios.post(`/admin/admin-login`,{email,password})
-    .then(()=>{
+    .then((response)=>{
+      const { admintoken } = response.data;
+      // Store token in localStorage
+      localStorage.setItem('admintoken', admintoken);
       toast.success('Login successfully')
       navigate('/admin-dashboard')
     })
