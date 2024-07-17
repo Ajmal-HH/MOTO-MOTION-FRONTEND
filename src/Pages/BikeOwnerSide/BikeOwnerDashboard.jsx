@@ -73,7 +73,7 @@ function BikeOwnerDashboard() {
                     toast.error('An error occurred. Please try again later.');
                 }
             })
-    },[])
+    },[bikeOwnerData])
 
   return (
     <div className="w-full flex">
