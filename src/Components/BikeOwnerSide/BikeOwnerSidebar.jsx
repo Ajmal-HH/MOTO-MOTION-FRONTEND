@@ -10,6 +10,7 @@ function BikeOwnerSidebar() {
   const handleLogout = () => {
     axios.get('/bikeowner/owner-logout')
       .then(() => {
+        localStorage.removeItem('ownerToken');  
         toast.success('Bike Owner Logout!');
         navigate('/bikeowner-login');
       })

@@ -8,6 +8,7 @@ function Adminsidebar() {
   const handleLogout = () =>{
     axios.get('/admin/admin-logout')
     .then(()=>{
+      localStorage.removeItem('admintoken');  
       toast.success('Admin Logout!')
       navigate('/admin')
     })
