@@ -25,6 +25,8 @@ const ChatOwnerSide = () => {
 
     const token = localStorage.getItem('ownerToken'); 
     const bikeOwnerData = localStorage.getItem('bikeOwnerData'); 
+    setSenderId(bikeOwnerData._id);
+
 
 
 
@@ -92,7 +94,7 @@ const ChatOwnerSide = () => {
             axios.post(`/messages/receiverdata/${receiverId}`,{bikeOwnerData})
                 .then((response) => {
                     setSelectedUser(response.data.receiverData);
-                    setSenderId(response.data.senderId);
+                    // setSenderId(response.data.senderId);
                 })
                 .catch((error) => {
                     console.error("Error fetching receiver data or chats:", error);
