@@ -20,7 +20,6 @@ function Chat() {
     const [messages, setMessages] = useState("");
     const messagesEndRef = useRef(null);
 
-    console.log(receiverId,"receiveriddddd");
 
     useEffect(() => {
         axios.get(`/messages/getreceiverdata`, {
@@ -61,9 +60,7 @@ function Chat() {
 
                 axios.get(`/messages/fetchchats/?id=${receiverId}&myId=${senderId}`)
                 .then((response) => {
-                    console.log(response.data,"responseData");
                     if (response) {
-                        console.log(message1,"message1");
                         setMessageData((prevMessages) => [...prevMessages, message1]);
                     }
                 });
@@ -76,7 +73,6 @@ function Chat() {
             axios.get(`/messages/fetchchats/?id=${receiverId}&myId=${senderId}`)
             .then((response) => {
                 if (response) {
-                    console.log(response.data,"data222");
                     setMessageData(response.data?.messageData);
                 }
             })
@@ -94,7 +90,6 @@ function Chat() {
 
     const sendMessage = () => {
         if (!messages || !receiverId) return;
-        console.log(messages,"messagessss");
         setMessageData((prevMessages) => [...prevMessages, { message: messages }]);
         socket.emit("sendMessage", {
             senderId: senderId,
