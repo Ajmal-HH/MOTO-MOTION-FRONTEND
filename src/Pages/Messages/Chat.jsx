@@ -92,7 +92,7 @@ function Chat() {
     const sendMessage = () => {
         if (!messages || !receiverId) return;
 
-        setMessageData((prevMessages) => [...prevMessages, { message: messages }]);
+        // setMessageData((prevMessages) => [...prevMessages, { message: messages }]);
         socket.emit("sendMessage", {
             senderId: senderId,
             receiverId: receiverId,
