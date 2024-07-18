@@ -1,14 +1,15 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState,useRef } from "react";
 import { TiMessage } from "react-icons/ti";
 import axios from '../../utils/axiosConfig';
 import { Link } from "react-router-dom";
 import { io } from "socket.io-client";
 
 const ChatOwnerSide = () => {
-    const [allUsers, setAllUsers] = useState([]); 
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [messages, setMessages] = useState(""); 
-    const [messageData, setMessageData] = useState([]); 
+    console.log("I Am chat");
+    const [allUsers, setAllUsers] = useState([]); // to list users in the sidebar
+    const [selectedUser, setSelectedUser] = useState(null); // to show name on the message heading
+    const [messages, setMessages] = useState(""); // to show name on the message heading
+    const [messageData, setMessageData] = useState([]); // Initialize as an empty string
     const [socket, setSocket] = useState(null);
     const [searchError, setSearchError] = useState("");
     const [search, setSearch] = useState("");
@@ -16,6 +17,10 @@ const ChatOwnerSide = () => {
     const [receiverId, setReceiverId] = useState();
     const [currentUsers, setCurrentUsers] = useState();
     const messagesEndRef = useRef(null);
+
+
+    console.log(senderId, "senderId");
+    console.log(receiverId, "receiverId");
 
     const token = localStorage.getItem('ownerToken'); 
     const bikeOwnerData = localStorage.getItem('bikeOwnerData'); 
@@ -36,7 +41,7 @@ const ChatOwnerSide = () => {
                 setCurrentUsers(users);
             });
 
-            const handleGetMessage = ({ senderId, message, receiverId }) => {
+            socket.on("getMessage", ({ senderId, message, receiverId }) => {
                 const message1 = {
                     createdAt: Date.now(),
                     message: message,
@@ -44,13 +49,7 @@ const ChatOwnerSide = () => {
                     senderId: senderId,
                 };
                 setMessageData((prevMessages) => [...prevMessages, message1]);
-            };
-
-            socket.on("getMessage", handleGetMessage);
-
-            return () => {
-                socket.off("getMessage", handleGetMessage);
-            };
+            });
         }
     }, [socket, senderId]);
 
@@ -160,6 +159,7 @@ const ChatOwnerSide = () => {
     return (
         <>
             <div className="flex h-screen overflow-hidden bg-blue-gray-500">
+                {/* SIDE BAR */}
                 <div className="w-1/4 border-r border-gray-300 bg-cyan-950">
                     <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-teal-500 text-white">
                         <div className="max-w-2xl mx-auto">
@@ -239,89 +239,127 @@ const ChatOwnerSide = () => {
                             </div>
                         </div>
                     </header>
-                    <ul className="p-4">
-                        {allUsers
-                            ?.filter((user) =>
-                                user.firstName.toLowerCase().includes(search.toLowerCase())
-                            )
-                            .map((user) => (
-                                <li
-                                    key={user._id}
-                                    onClick={() => handleUserClick(user)}
-                                    className="cursor-pointer mb-2 flex items-center"
-                                >
-                                    <div className="rounded-full bg-gray-300 w-8 h-8 flex items-center justify-center">
-                                        {user.profileImage ? (
-                                            <img
-                                                src={user.profileImage}
-                                                alt={user.firstName}
-                                                className="w-full h-full rounded-full object-cover"
-                                            />
-                                        ) : (
-                                            <span className="text-gray-600">
-                                                {user.firstName[0]}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <span className="ml-2">{user.firstName}</span>
-                                </li>
-                            ))}
-                    </ul>
-                </div>
-                <div className="flex flex-col flex-grow bg-white">
-                    <header className="p-4 border-b border-gray-300 bg-cyan-950 text-white">
-                        <h1 className="text-xl">
-                            {selectedUser ? selectedUser.firstName : "Select a user to chat"}
-                        </h1>
-                    </header>
-                    <div className="flex-grow p-4 overflow-auto">
-                        <div className="space-y-4">
-                            {messageData?.map((msg, index) => (
+
+                    <div className="overflow-y-auto h-screen p-3 mb-9 pb-20">
+                        {allUsers?.map((user) => {
+                            return (
                                 <div
-                                    key={index}
-                                    className={`flex ${
-                                        msg.senderId === senderId ? "justify-end" : "justify-start"
-                                    }`}
+                                    key={user?._id}
+                                    onClick={() => handleUserClick(user)}
+                                    className="flex items-center mb-4 cursor-pointer hover:bg-cyan-700 p-2 rounded-md"
                                 >
-                                    <div
-                                        className={`rounded-lg p-2 ${
-                                            msg.senderId === senderId
-                                                ? "bg-cyan-950 text-white"
-                                                : "bg-gray-300 text-gray-900"
-                                        }`}
-                                    >
-                                        {msg.message}
+                                    <div className="w-12 h-12 bg-gray-300 rounded-full mr-3">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144"
+                                            alt="User Avatar"
+                                            className="w-12 h-12 rounded-full"
+                                        />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h2 className="text-l text-white font-semibold">
+                                            {user?.name}
+                                        </h2>
+                                        <p className="text-white">How are you!!</p>
                                     </div>
                                 </div>
-                            ))}
-                            <div ref={messagesEndRef} />
-                        </div>
+                            );
+                        })}
                     </div>
-                    <form className="p-4 border-t border-gray-300" onSubmit={handleSubmit}>
-                        <div className="flex items-center">
-                            <input
-                                type="text"
-                                className="flex-grow border border-gray-300 rounded-lg p-2"
-                                placeholder="Type a message..."
-                                value={messages}
-                                onChange={(e) => setMessages(e.target.value)}
-                            />
-                            <button
-                                type="submit"
-                                className="ml-2 p-2 bg-cyan-950 text-white rounded-lg"
-                            >
-                                Send
-                            </button>
-                        </div>
-                    </form>
                 </div>
+
+                {/* ==================MESSAGE CONTAINER================================= */}
+
+                <div className="flex-1 bg-white overflow-y-auto mb-20">
+                    {selectedUser ? (
+                        <header className="bg-cyan-950 fixed w-full p-4 text-white">
+                            <div className=" ">
+                                <h1 className="text-2xl font-semibold">
+                                    {selectedUser?.name}
+                                </h1>
+                            </div>
+                            <div className="w-9/12 flex items-center justify-end gap-4">
+                                <Link to="/bikeowner-dashboard">
+                                    <button className="button-class">Back</button>
+                                </Link>
+                            </div>
+                            <div className="flex-grow">
+                                {" "}
+                                {/* This div takes up the rest of the space */}
+                            </div>
+                        </header>
+                    ) : (
+                        <div className="flex items-center justify-center w-full h-full">
+                            <div className="px-4 text-center sm:text-lg md:text-xl text-black font-semibold flex flex-col items-center gap-2">
+                                <p>Welcome 👋 ❄</p>
+                                <p>Select a chat to start messaging</p>
+                                <TiMessage className="text-3xl md:text-6xl text-center" />
+                            </div>
+                        </div>
+                    )}
+
+                    {/* userSide */}
+
+                    <div className="w-full h-full mt-18 pt-10 p-4">
+                        {messageData?.map((item, index) => (
+                            <div
+                                key={index}
+                                className={`flex flex-col gap-2 mb-4 cursor-pointer overflow-y-auto ${item.senderId === senderId ? 'items-end' : 'items-start'
+                                    }`}
+                            >
+                                <div className={`flex ${item.senderId === senderId ? 'flex-row-reverse' : ''}`}>
+                                    <div className="w-9 h-9 rounded-full flex items-center justify-center mr-2">
+                                        <img
+                                            src="https://placehold.co/200x/ffa8e4/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato"
+                                            alt="User Avatar"
+                                            className="w-8 h-8 rounded-full"
+                                        />
+                                    </div>
+                                    <div className={`flex max-w-xs flex-col rounded-lg p-3 gap-3 ${item.senderId === senderId ? 'rounded-br-none bg-blue-600 text-white' : 'rounded-bl-none bg-gray-500'
+                                        }`}>
+                                        <p className={`text-sm ${item.senderId === senderId ? 'text-black' : 'text-white'
+                                            }`}>{item.message}</p>
+                                    </div>
+                                </div>
+                                <div ref={messagesEndRef}></div>
+                            </div>
+                        ))}
+
+                    </div>
+
+                    {/* Message posting Section */}
+
+                    <footer className="bg-teal-500 border-t border-gray-300 p-4 absolute bottom-0 w-3/4">
+                        {selectedUser && (
+                            <form onSubmit={handleSubmit}>
+                                <div className="flex items-center">
+                                    <input
+                                        type="text"
+                                        placeholder="Type a message..."
+                                        value={messages}
+                                        onChange={(e) => {
+                                            console.log(e.target.value);
+                                            setMessages(e.target.value);
+                                        }}
+                                        className="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500"
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="bg-teal-950 text-white px-4 py-2 rounded-md ml-2"
+                                    >
+                                        Send
+                                    </button>
+                                </div>
+                            </form>
+                        )}
+                    </footer>
+                </div>
+                {/* MESSAGE CONTAINER ENDS HERE */}
             </div>
         </>
     );
-};
+}
 
 export default ChatOwnerSide;
-
 
 
 
