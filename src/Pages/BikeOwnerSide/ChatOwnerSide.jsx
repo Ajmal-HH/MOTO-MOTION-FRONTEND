@@ -319,8 +319,8 @@ const ChatOwnerSide = () => {
                                         <p className={`text-sm ${item.senderId === senderId ? 'text-black' : 'text-white'
                                             }`}>{item.message}</p>
                                     </div>
-                                </div>
                                 <div ref={messagesEndRef}></div>
+                                </div>
                             </div>
                         ))}
 
