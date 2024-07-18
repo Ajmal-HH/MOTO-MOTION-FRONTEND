@@ -24,6 +24,8 @@ const ChatOwnerSide = () => {
     console.log(receiverId,"receiverId");
 
     const token = localStorage.getItem('ownerToken'); 
+    const bikeOwnerData = localStorage.getItem('bikeOwnerData'); 
+
 
 
 
@@ -87,7 +89,7 @@ const ChatOwnerSide = () => {
 
     useEffect(() => {
         if (receiverId) {
-            axios.get(`/messages/receiverdata/${receiverId}`)
+            axios.post(`/messages/receiverdata/${receiverId}`,{bikeOwnerData})
                 .then((response) => {
                     setSelectedUser(response.data.receiverData);
                     setSenderId(response.data.senderId);
