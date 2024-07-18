@@ -20,6 +20,8 @@ function Chat() {
     const [messages, setMessages] = useState("");
     const messagesEndRef = useRef(null);
 
+    console.log(receiverId,"receiveriddddd");
+
     useEffect(() => {
         axios.get(`/messages/getreceiverdata`, {
             params: { receiverId }
