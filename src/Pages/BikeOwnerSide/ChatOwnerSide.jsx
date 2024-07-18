@@ -91,7 +91,7 @@ const ChatOwnerSide = () => {
 
     useEffect(() => {
         if (receiverId) {
-            axios.post(`/messages/receiverdata/${receiverId}`, { bikeOwnerData }, {
+            axios.get(`/messages/receiverdata/${receiverId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
