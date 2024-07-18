@@ -320,9 +320,9 @@ const ChatOwnerSide = () => {
                                             }`}>{item.message}</p>
                                     </div>
                                 </div>
+                                <div ref={messagesEndRef}></div>
                             </div>
                         ))}
-                         <div ref={messagesEndRef}></div>
 
                     </div>
 
