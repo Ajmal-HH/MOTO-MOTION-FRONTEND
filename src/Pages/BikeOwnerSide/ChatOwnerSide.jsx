@@ -20,6 +20,9 @@ const ChatOwnerSide = () => {
     const [receiverId, setReceiverId] = useState()
     const [curentUsers, setCurentUsers] = useState()
 
+    console.log(senderId,"senderId");
+    console.log(receiverId,"receiverId");
+
 
     useEffect(() => {
         const newSocket = io("https://muhamedajmal.live");
