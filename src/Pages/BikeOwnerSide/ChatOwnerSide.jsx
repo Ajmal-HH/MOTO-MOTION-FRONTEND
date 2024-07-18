@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { TiMessage } from "react-icons/ti";
 import axios from '../../utils/axiosConfig';
 import { Link } from "react-router-dom";
@@ -16,6 +16,7 @@ const ChatOwnerSide = () => {
     const [senderId, setSenderId] = useState();
     const [receiverId, setReceiverId] = useState();
     const [currentUsers, setCurrentUsers] = useState();
+    const messagesEndRef = useRef(null); // Reference for the last message
 
     console.log(senderId, "senderId");
     console.log(receiverId, "receiverId");
@@ -147,6 +148,13 @@ const ChatOwnerSide = () => {
             setSearch(inputValue);
         }
     };
+
+    // Scroll to the last message whenever messageData changes
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [messageData]);
 
     return (
         <>
@@ -314,6 +322,8 @@ const ChatOwnerSide = () => {
                                 </div>
                             </div>
                         ))}
+                        {/* Add a reference to the last message */}
+                        <div ref={messagesEndRef} />
                     </div>
 
                     {/* Message posting Section */}
@@ -350,6 +360,7 @@ const ChatOwnerSide = () => {
 }
 
 export default ChatOwnerSide;
+
 
 
 
