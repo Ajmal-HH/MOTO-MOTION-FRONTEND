@@ -16,6 +16,8 @@ const ChatOwnerSide = () => {
     const [senderId, setSenderId] = useState();
     const [receiverId, setReceiverId] = useState();
     const [currentUsers, setCurrentUsers] = useState();
+    const messagesEndRef = useRef(null);
+
 
     console.log(senderId, "senderId");
     console.log(receiverId, "receiverId");
@@ -105,6 +107,12 @@ const ChatOwnerSide = () => {
                 });
         }
     }, [receiverId, bikeOwnerData, token]);
+
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messageData]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -314,6 +322,8 @@ const ChatOwnerSide = () => {
                                 </div>
                             </div>
                         ))}
+                         <div ref={messagesEndRef}></div>
+
                     </div>
 
                     {/* Message posting Section */}
