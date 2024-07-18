@@ -23,6 +23,9 @@ const ChatOwnerSide = () => {
     console.log(senderId,"senderId");
     console.log(receiverId,"receiverId");
 
+    const token = localStorage.getItem('ownerToken'); 
+
+
 
     useEffect(() => {
         const newSocket = io("https://muhamedajmal.live");
