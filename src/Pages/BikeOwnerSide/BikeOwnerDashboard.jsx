@@ -12,7 +12,7 @@ function BikeOwnerDashboard() {
  
     const [totalBookings, setTotalBookings] = useState(0)
     const [totolBikes, setTotolBikes] = useState(0)
-    const [totalRevenue, setTotalRevenue] = useState(0)
+    const [totalRevenue, setTotalRevenue] = useState(15000)
     const [monthlySales,setMonthlySales] =useState([])
     
     const [bookingList, setBookingList] = useState([]);
