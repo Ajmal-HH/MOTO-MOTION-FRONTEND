@@ -6,11 +6,13 @@ import Pagination from "../../Components/All/Pagination";
 
 function BookingList() {
     const [bookingList, setBookingList] = useState([]);
+    const bikeOwnerData = JSON.parse(localStorage.getItem('bikeOwnerData')); 
+
 
     useEffect(() => {
-        axios.get('/bikeowner/booking-list')
+        axios.get('/bikeowner/booking-list',{bikeOwnerData})
             .then((response) => {
-                setBookingList(response.data);
+                setBookingList(response.data);  
             })
             .catch(() => {
                 toast.error('Error fetching bike details');
