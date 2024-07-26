@@ -10,7 +10,7 @@ function BookingList() {
 
 
     useEffect(() => {
-        axios.get('/bikeowner/booking-list',{bikeOwnerData})
+        axios.post('/bikeowner/booking-list',{bikeOwnerData})
             .then((response) => {
                 setBookingList(response.data);  
             })
