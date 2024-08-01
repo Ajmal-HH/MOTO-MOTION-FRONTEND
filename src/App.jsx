@@ -48,6 +48,8 @@ import { useAuthContext } from './context/AuthContext';
 import Chat from './Pages/Messages/Chat';
 import ChatOwnerSide from './Pages/BikeOwnerSide/ChatOwnerSide';
 import ErrorPage from './Components/All/ErrorPage';
+import VerifyBikeDocument from './Pages/AdminSide/VerifyBikeDocument';
+import AdminBikeDetails from './Pages/AdminSide/AdminBikeDetails';
 
 function App() {
   const {authUser} = useAuthContext()
@@ -100,6 +102,8 @@ function App() {
                 <Route path='/admin-loadeditowner' element={<AdminEditOwner />} />
                 <Route path='/admin-bookinglist' element={<AdminBookingList />} />
                 <Route path='/admin-bikelist' element={<AdminBikeList />} />
+                <Route path='/verify-bikedocument' element={<VerifyBikeDocument />} />
+                <Route path='/bike-details-admin' element={<AdminBikeDetails />} />
               </Route>
             </Routes>
           </Suspense>

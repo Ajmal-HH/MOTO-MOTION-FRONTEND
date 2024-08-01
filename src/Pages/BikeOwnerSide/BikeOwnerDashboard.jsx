@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import BikeOwnerAside from '../../Components/BikeOwnerSide/BikeOwnerSidebar'
 import SalesReport from '../../Components/AdminSide/SalesReport';
