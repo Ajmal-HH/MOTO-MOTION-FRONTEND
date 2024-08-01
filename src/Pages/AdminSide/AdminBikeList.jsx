@@ -54,8 +54,10 @@ function AdminBikeList() {
             <Adminsidebar />
             <div className='flex flex-col flex-1 bg-gray-200 font-googleFont'>
                 <h1 className='text-center text-2xl pt-3'>Bike List</h1>
+                <div className='flex'>
                 <Link to={'/addbike'} className='bg-blue-500 ml-4 w-32 h-6 rounded-md text-center'>ADD NEW BIKE</Link>
-                <div className="overflow-x-auto mt-2">
+                <Link to={'/verify-bikedocument'} className='bg-blue-500 ml-4 w-52 h-6 rounded-md text-center'>VERIFY BIKE DOCUMENT</Link>
+                </div>                <div className="overflow-x-auto mt-2">
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
