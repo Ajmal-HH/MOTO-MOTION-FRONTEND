@@ -16,6 +16,7 @@ function AddBike() {
     const [rent, setRent] = useState()
     const [bikeType, setBikeType] = useState('')
     const [image, setImage] = useState([])
+    const [document, setDocument] = useState([])
     const [details, setDetails] = useState('')
     const [address, setAddress] = useState('')
     const [pinCode, setPinCode] = useState()
@@ -23,16 +24,15 @@ function AddBike() {
     const [loader, setLoader] = useState(false)
     const navigate = useNavigate()
 
-    const bikeOwnerData = JSON.parse(localStorage.getItem('bikeOwnerData')); 
-
-
+    console.log(image, "image");
+    console.log(document,"document");
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoader(true)
         try {
             await addBikeValidationSchema.validate(
-                { bikeName, bikeNO, location, rent, bikeType, bikeCC, details, image, address, pinCode },
+                { bikeName, bikeNO, location, rent, bikeType, bikeCC, details, image, address, pinCode, document },
                 { abortEarly: false }
             );
             const formData = new FormData()
@@ -40,6 +40,10 @@ function AddBike() {
             image.forEach((file) => {
                 formData.append(`image`, file);
             });
+            document.forEach((file) => {
+                formData.append(`document`, file);
+              });
+              
             formData.append("bikeName", bikeName);
             formData.append("bikeNO", bikeNO);
             formData.append("location", location);
@@ -49,8 +53,7 @@ function AddBike() {
             formData.append("details", details);
             formData.append("address", address)
             formData.append("pinCode", pinCode)
-            formData.append('bikeOwnerData', JSON.stringify(bikeOwnerData))
-
+            // formData.append("document", document)
 
             axios.post(`/bikeowner/addbike`, formData, {
                 headers: {
@@ -90,7 +93,7 @@ function AddBike() {
             <BikeOwnerSidebar />
             <div className="bg-gray-200 w-full font-googleFont p-8 rounded-lg">
 
-            <div className="bg-gray-200 w-full font-googleFont p-8 rounded-lg">
+                <div className="bg-gray-200 w-full font-googleFont p-8 rounded-lg">
                     <div className="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto">
                         <h1 className="text-3xl font-bold text-center mb-6">ADD BIKE</h1>
                         <form onSubmit={handleSubmit} className="space-y-6">
@@ -113,7 +116,13 @@ function AddBike() {
                                 </div>
                                 <div>
                                     <label htmlFor="bikeLocation" className="block text-sm font-semibold text-gray-700">Bike Location</label>
-                         
+                                    {/* <input type="text"
+                                    id="location"
+                                    name='location'
+                                    placeholder="Enter Bike location"
+                                    className="input-field border border-gray-400 w-full pl-2"
+                                    onChange={(e) => setLocation(e.target.value)}
+                                /> */}
                                     <select className=' border border-gray-400 w-full pl-2' onChange={(e) => setLocation(e.target.value)}>
                                         <option value="">select</option>
                                         <option value="Fort kochi">Fort kochi</option>
@@ -215,7 +224,7 @@ function AddBike() {
 
                                 </div>
                                 <div>
-                                    <label htmlFor="image" className="block text-sm font-semibold text-gray-700">Add Image </label>
+                                    <label htmlFor="image" className="block text-sm font-semibold text-gray-700">Add Bike Image </label>
                                     <input
                                         type="file"
                                         id="image"
@@ -233,10 +242,29 @@ function AddBike() {
                                     {errors.image && <div className='text-red-600'>{errors.image}</div>}
 
                                 </div>
+                                <div>
+                                    <label htmlFor="image" className="block text-sm font-semibold text-gray-700">
+                                        Add RC & Insure paper
+                                    </label>
+                                    <input
+                                        type="file"
+                                        id="document"
+                                        name="document"
+                                        className="input-field"
+                                        accept="image/png, image/jpeg, image/jpg"
+                                        multiple
+                                        onChange={(e) => {
+                                            console.log(e.target.files);
+                                            const files = Array.from(e.target.files);
+                                            setDocument(files);
+                                        }}
+                                    />
+                                    {errors.document && <div className='text-red-600'>{errors.document}</div>}
+                                </div>
                             </div>
 
                             <button type="submit" className="w-full flex justify-center py-3 bg-blue-500 text-white font-semibold rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-75">
-                                {loader ? <Loader /> : "ADD BIKE" }
+                                {loader ? <Loader /> : "ADD BIKE"}
 
                             </button>
                         </form>

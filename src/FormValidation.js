@@ -60,6 +60,9 @@ export const addBikeValidationSchema = Yup.object({
     pinCode: Yup.string()
     .required('Please enter a Pincode')
     .min(6,'Invalid pincode'),
+    document: Yup.array()
+    .max(2, 'Please select at least three image')
+    .required('Please select Rc & Insure'),
 });
 
 
