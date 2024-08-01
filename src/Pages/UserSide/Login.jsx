@@ -97,7 +97,10 @@ function Login() {
                     credentialResponse.credential,
                   )
                   axios.post('/google-auth',credentialResponseDecoded)
-                  .then(()=>{
+                  .then((response)=>{
+                    const { token } = response.data;
+                    // Store token in localStorage
+                    localStorage.setItem('token', token);
                     navigate('/')
                     toast.success('Login success')
                   })
