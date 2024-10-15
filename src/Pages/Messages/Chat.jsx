@@ -35,7 +35,8 @@ function Chat() {
     }, [receiverId]);
 
     useEffect(() => {
-      const newSocket = io("https://muhamedajmal.live");
+    //   const newSocket = io("https://muhamedajmal.live");
+      const newSocket = io("https://moto-motion-backend.vercel.app/");
       setSocket(newSocket);
 
       return () => {

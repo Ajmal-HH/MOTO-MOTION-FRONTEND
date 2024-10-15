@@ -27,7 +27,8 @@ const ChatOwnerSide = () => {
     const bikeOwnerData = localStorage.getItem('bikeOwnerData'); 
 
     useEffect(() => {
-        const newSocket = io("https://muhamedajmal.live");
+        // const newSocket = io("https://muhamedajmal.live");
+        const newSocket = io("https://moto-motion-backend.vercel.app/");
         setSocket(newSocket);
 
         return () => {

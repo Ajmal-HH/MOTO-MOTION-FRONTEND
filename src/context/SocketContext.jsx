@@ -17,7 +17,8 @@ export const SocketContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (authUser) { 
-			const socket = io("https://muhamedajmal.live/api", {
+			// const socket = io("https://muhamedajmal.live/api", {
+			const socket = io("https://moto-motion-backend.vercel.app/api", {
 				query: {
 					userId: authUser?._id,
 				},
